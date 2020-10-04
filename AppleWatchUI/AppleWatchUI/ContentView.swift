@@ -250,7 +250,7 @@ struct TabBarView: View {
     
     private var inset: CGFloat {
         
-        var bottomInsets = UIApplication.shared.windows.first?.safeAreaInsets
+        let bottomInsets = UIApplication.shared.windows.first?.safeAreaInsets
         
         let bottomInset = (bottomInsets?.bottom == 0 ? 15 : bottomInsets?.bottom) ?? 15
         return bottomInset
