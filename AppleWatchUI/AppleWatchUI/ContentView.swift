@@ -51,6 +51,7 @@ struct Home: View {
                 TabBarView()
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -232,6 +233,7 @@ struct TabBarView: View {
                     .foregroundColor(self.tab == 1 ? .black : Color.black.opacity(0.25))
                 
             }
+            
             Spacer(minLength: 0)
             
             Button(action: {
@@ -244,15 +246,28 @@ struct TabBarView: View {
             }
         }
         .padding(.horizontal, 30)
-        .padding(.top)
+        .padding(.top, 30)
         .padding(.bottom, inset)
+        .background(Color.white)
+        .clipShape(CShape())
     }
     
     private var inset: CGFloat {
         
         let bottomInsets = UIApplication.shared.windows.first?.safeAreaInsets
         
-        let bottomInset = (bottomInsets?.bottom == 0 ? 15 : bottomInsets?.bottom) ?? 15
+        let bottomInset = (bottomInsets?.bottom == 0 ? 15 : bottomInsets!.bottom + 10)
         return bottomInset
+    }
+}
+
+
+struct CShape: Shape {
+    
+    func path(in rect: CGRect) -> Path {
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 45, height: 45))
+        
+        return Path(path.cgPath)
     }
 }
